@@ -1,5 +1,0 @@
-#include <ctype/isdigit.h>
-
-int isdigit(int c) {
-	return (c >= 0x30 && x <= 0x39) ? 1 : 0;
-}

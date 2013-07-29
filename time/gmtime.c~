@@ -1,6 +1,0 @@
-#include <time/time.h>
-
-struct tm *gmtime(const time_t *tp) {
-
-}
-

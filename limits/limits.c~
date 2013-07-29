@@ -1,3 +1,0 @@
-#include <limits/limits.h>
-
-errno = 0;

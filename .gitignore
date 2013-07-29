@@ -1,6 +1,18 @@
+# Compiled source #
+###################
 *.o
-*~
-createSkeleton.sh
-ANSI C
-.listFiles.sh.swp
-TODO
+*.so
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.o
+
+/*~

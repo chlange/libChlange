@@ -1,5 +1,0 @@
-#include <time/time.h>
-
-char *asctime(const struct tm *tp) {
-
-}

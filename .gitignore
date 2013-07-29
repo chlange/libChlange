@@ -1,3 +1,4 @@
+*.o
 *~
 createSkeleton.sh
 ANSI C

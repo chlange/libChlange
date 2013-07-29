@@ -1,0 +1,6 @@
+#include <time/mktime.h>
+
+time_t mktime(struct tm *tp) {
+
+}
+

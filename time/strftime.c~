@@ -1,0 +1,5 @@
+#include <time/time.h>
+
+size_t strftime(char *s, size_t smax, const char *fmt, const struct tm *tp) {
+
+}

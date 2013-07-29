@@ -1,0 +1,7 @@
+#include <ctype/isalnum.h>
+#include <ctype/isalpha.h>
+#include <ctype/isdigit.h>
+
+int __isalnum(int c) {
+	return (isalpha(c) || isdigit(c)) ? 1 : 0;
+}

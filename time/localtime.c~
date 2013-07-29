@@ -1,0 +1,5 @@
+#include <time/time.h>
+
+struct tm *localtime(const time_t *tp) {
+
+}

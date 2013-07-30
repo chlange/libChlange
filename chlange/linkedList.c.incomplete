@@ -1,0 +1,281 @@
+#include <chlange/linkedList.h>
+#include <errno.h>
+
+/* 
+ * Creates new list. 
+ * 
+ * Returns a (non-NULL) pointer to list on success.
+ */
+LinkedList *ll_createNew(void) {
+	LinkedList *list = (LinkedList *)malloc(sizeof(LinkedList));
+	if(list == NULL) {
+		errno = ENOMEM;
+	} else {
+		list->head = NULL;
+		list->tail = NULL;
+		list->size = 0;
+	}
+	return list;
+}
+
+/* 
+ * Appends a new node with attached data to list.
+ * 
+ * Returns (non-NULL) pointer to attached node on success.
+ */
+Node *ll_append(LinkedList *list, void *data) {
+	if(list == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+	
+	Node *node = (Node *)malloc(sizeof(Node));
+	if(node == NULL) {
+		errno = ENOMEM;
+		return NULL;
+	}
+	
+	node->data = data;
+	
+    if(list->size == 0) {
+        list->head = node;
+        list->tail = node;
+    } else if (list->size >= 1) {
+        node->prev = list->tail;
+        list->tail->next = node;
+        list->tail = node;
+    }
+    
+	list->size++;
+	
+	return node;
+}
+
+/* 
+ * Prepends a new node with attached data to list.
+ * 
+ * Returns (non-NULL) pointer to prepended node on success.
+ */
+Node *ll_prepend(LinkedList *list, void *data) {
+	if(list == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+	
+	Node *node = (Node *)malloc(sizeof(Node));
+	if(node == NULL) {
+		errno = ENOMEM;
+		return NULL;
+	}
+	
+	node->data = data;
+    node->prev = NULL;
+    
+    if(list->size == 0) {
+        list->head = node;
+        list->tail = node;
+    } else {
+        node->next = list->head;
+        list->head->prev = node;
+        list->head = node;
+    }
+	
+	list->size++;
+	
+	return node;
+}
+
+/* 
+ * Removes head of list.
+ * 
+ * Returns a pointer to deprecated head on success or NULL on error.
+ * If list has no members NULL is returned, too, but errno is set to NOERROR!
+ */
+Node *ll_remHead(LinkedList *list) {
+	if(list == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+	
+	if(list->size <= 0 || list->head == NULL) {
+        errno = 0;
+		return NULL;
+    }
+	
+	Node *deprecatedNode = list->head;
+	list->head = list->head->next;
+
+    if(list->size == 1)
+        list->tail = NULL;
+    else if(list->size >= 2)
+        list->head->prev = NULL;
+	
+	list->size--;
+	
+	return deprecatedNode;
+}
+
+/* 
+ * Removes tail of list.
+ * 
+ * Returns a pointer to deprecated tail on success or NULL on error.
+ * If list has no members NULL is returned, too, but errno is set to NOERROR!
+ */
+Node *ll_remTail(LinkedList *list) {
+	if(list == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+	
+	if(list->size == 0) {
+        errno = NOERROR;
+		return NULL;
+    }
+	
+	Node *deprecatedNode = list->tail;
+
+    if(list->size == 1) {
+        list->head = NULL;
+        list->tail = NULL;
+    } else if(list->size >= 2) {
+        list->tail->prev->next = NULL;
+        list->tail = list->tail->prev;
+    }
+    
+    list->size--;
+	
+	return deprecatedNode;
+}
+
+/* 
+ * Adds a new node with attached data after node in list.
+ * 
+ * Returns (non-NULL) pointer to added node on success.
+ */
+Node *ll_addAfter(LinkedList *list, Node *node, void *data) {
+    if(list == NULL || node == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+    	
+    Node *newNode = (Node *)malloc(sizeof(Node));
+	if(newNode == NULL) {
+		errno = ENOMEM;
+		return NULL;
+	}
+    
+    newNode->data = data;
+
+    if(node->next == NULL) {
+        /* Add as tail */
+        node->next = newNode;
+        newNode->prev = node;
+        newNode->next = NULL;
+        list->tail = newNode;
+    } else {
+        /* Between two nodes */
+        node->next->prev = newNode;
+        newNode->next = node->next;
+        newNode->prev = node;
+        node->next = newNode;
+    }
+    
+    list->size++;
+    
+    return newNode;
+}
+
+/* 
+ * Adds a new node with attached data before node in list.
+ * 
+ * Returns (non-NULL) pointer to added node on success.
+ */
+Node *ll_addBefore(LinkedList *list, Node *node, void *data) {
+    if(list == NULL || node == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+    	
+    Node *newNode = (Node *)malloc(sizeof(Node));
+	if(newNode == NULL) {
+		errno = ENOMEM;
+		return NULL;
+	}
+    
+    newNode->data = data;
+    
+    if(node->prev == NULL) {
+        /* Add as head */
+        newNode->next = node;
+        newNode->prev = NULL;
+        node->prev = newNode;
+        list->head = newNode;
+    } else {
+        /* Between two nodes */
+        newNode->next = node;
+        newNode->prev = node->prev;
+        node->prev->next = newNode;
+        node->prev = newNode;
+    }
+    
+    list->size++;
+    
+    return newNode;
+}
+
+/* 
+ * Removes node from list. 
+ * 
+ * Returns (non-NULL) pointer to removed node on success.
+ */
+Node *ll_remNode(LinkedList *list, Node *node) {
+    if(list == NULL || node == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+    
+    if(node->prev == NULL && node->next == NULL) {
+        /* Head and tail */
+        list->tail = NULL;
+        list->head = NULL;
+    } else if(node->prev == NULL && node->next != NULL) {
+        /* Head with at least one node more */
+        node->next->prev = NULL;
+        list->head = node->next;
+    } else if(node->prev != NULL && node->next != NULL) {
+        /* Between two elements */
+        node->prev->next = node->next;
+        node->next->prev = node->prev;
+    } else {
+        /* Tail with at least one node more */
+        node->prev->next = NULL;
+        list->tail = node->prev;
+    }
+    
+    list->size--;
+    
+    return node;
+}
+
+/*
+ * Returns (non-NULL) pointer to node at position on success.
+ */
+Node *ll_getNodeAtPosition(LinkedList *list, size_t position) {
+    if(list == NULL || position > list->size) {
+		errno = EINVAL;
+		return NULL;
+	}
+    
+    Node *node = list->head;
+    
+    while(--position) {
+        if(node == NULL) {
+            /* Less nodes in list than in size variable */
+            errno = EFAULT;
+            return NULL;
+        }
+        node = node->next;
+    }
+    
+    return node;
+}

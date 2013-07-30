@@ -8,7 +8,7 @@ __BEGIN_DECLS
 
 #define CLOCKS_PER_SEC 1000000l
 
-typedef unsigned long int clock_t;
+typedef unsigned long clock_t;
 typedef signed long time_t;
 
 struct tm {

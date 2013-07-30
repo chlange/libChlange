@@ -1,15 +1,16 @@
-#ifdef ASSERT_H
+#include <assert/assert.h>
+#include <stdio.h>
 
-	#include <assert/assert.h>
+#ifndef NDEBUG
 
 	void assertionFailure(char *exp, char *file, char *baseFile, int line)
 	{
 	    if (!strcmp(file, baseFile)) {
 	       fprintf(stderr, 
-		   "Assert(%s) failed in file %s, line %d\n", exp, file, line);
+		   "assert(%s) failed in file %s, line %d\n", exp, file, line);
 	    } else {
 	       fprintf(stderr, 
-		   "Assert(%s) failed in file %s (included from %s), line %d\n", 
+		   "assert(%s) failed in file %s (included from %s), line %d\n", 
 		   exp, file, baseFile, line);
 	    }
 	}

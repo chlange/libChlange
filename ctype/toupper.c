@@ -1,5 +1,4 @@
-#include <ctype/toupper.h>
-#include <ctype/islower.h>
+#include <ctype.h>
 
 int toupper(int c) {
 	if(islower(c)) {

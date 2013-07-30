@@ -1,5 +1,6 @@
 SHELL        = /bin/sh
 CC           = gcc
+RM           = rm
 CFLAGS       = -fPIC -g -std=c90 -pedantic -Wall -Wextra -Iinclude
 LDFLAGS      = -shared
 DEBUGFLAGS   = -O0 -D _DEBUG
@@ -13,7 +14,7 @@ OBJECTS = $(SOURCES:.c=.o)
 all: $(TARGET)
 
 clean: 
-	rm $(OBJECTS) $(TARGET)
+	-$(RM) -f $(OBJECTS) $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(DEBUGFLAGS) -o $(TARGET) $(OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUGFLAGS) -o $(TARGET) $(OBJECTS)

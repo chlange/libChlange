@@ -1,6 +1,8 @@
 #ifndef ERRNO_H
 #define ERRNO_H
 
+#include <sys/cdefs.h>
+
 #define NOERROR          0      /* No error happened */
 #define EPERM            1      /* Operation not permitted */
 #define ENOENT           2      /* No such file or directory */
@@ -130,6 +132,10 @@
 #define ENOMEDIUM       123     /* No medium found */
 #define EMEDIUMTYPE     124     /* Wrong medium type */
 
+__BEGIN_DECLS
+
 extern int errno;
+
+__END_DECLS
 
 #endif

@@ -1,10 +1,13 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include <assert/assert.h>
-#include <stddef/stddef.h>
+#include <sys/cdefs.h>
+#include <assert.h>
+#include <stddef.h>
 #include <errno.h>
 #include <stdlib.h>
+
+__BEGIN_DECLS
 
 typedef struct _Node {
     struct _Node *prev;
@@ -79,5 +82,7 @@ Node *ll_remNode(LinkedList *list, Node *node);
  * Position starts by 1!
  */
 Node *ll_getNodeAtPosition(LinkedList *list, size_t position);
+
+__END_DECLS
 
 #endif

@@ -134,6 +134,10 @@
 
 __BEGIN_DECLS
 
+/* 
+ * An error code value set by some functions. 
+ * It is generally the responsibility of the programmer to clear errno before calling such a function. 
+ */
 extern int errno;
 
 __END_DECLS

@@ -9,7 +9,7 @@ __BEGIN_DECLS
 
 typedef signed long ptrdiff_t;
 typedef unsigned long size_t;
-typedef int wchar_t; 
+typedef int wchar_t;
 
 #define offsetof(type, member) ((size_t) &(((type *)0)->member))
 

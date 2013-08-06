@@ -8,6 +8,5 @@ char *strncpy(char *str1, const char *str2, size_t n) {
         else
             *p1++ = '\0';
     }
-    *p1 = '\0';
     return str1;
 }

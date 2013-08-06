@@ -22,4 +22,12 @@
 # Misc #
 ########
 test
+a.out
+libchlange.a
+main
+main.c
+main.s
+memchr
+memcmp
+memcpy
 createSkeleton.sh

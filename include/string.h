@@ -12,5 +12,6 @@ void *memset(void *str, int c, size_t n);
 char *strcat(char *str1, const char *str2);
 char *strncat(char *str1, const char *str2, size_t n);
 char *strchr(const char *str, int c);
+int strcmp(const char *str1, const char *str2);
 
 #endif

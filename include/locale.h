@@ -35,8 +35,10 @@ struct lconv {
     char  n_sign_posn;
 };
 
+//~ Sets the structure lconv to represent the current location settings.
 struct lconv *localeconv(void);
 
+//~ Sets or reads location dependent information.
 char *setlocale(int category, const char *locale);
 
 __END_DECLS

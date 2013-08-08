@@ -268,7 +268,7 @@ Node *list_getNodeAtPosition(LinkedList *list, size_t position) {
 
     Node *node = list->head;
 
-    while(--position) {
+    while(position--) {
         if(node == NULL) {
             /* Less nodes in list than in size variable */
             errno = EFAULT;

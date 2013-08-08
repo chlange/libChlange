@@ -6,8 +6,8 @@ LDFLAGS      = -shared
 DEBUGFLAGS   = -O0 -D _DEBUG
 RELEASEFLAGS = -O2 -D NDEBUG -combine -fwhole-program
 
-TARGET  = libchlange.so
-TARGET_STATIC = libchlange.a
+TARGET  = libChlange.so
+TARGET_STATIC = libChlange.a
 SOURCES = $(shell echo */*.c)
 HEADERS = $(shell echo include/*.h)
 OBJECTS = $(SOURCES:.c=.o)

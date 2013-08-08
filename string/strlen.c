@@ -2,7 +2,7 @@
 
 size_t strlen(const char *str) {
 	register const char *p = str;
-	while(*p)
-		p++;
+	while(*p++)
+		;
 	return p - str;
 }

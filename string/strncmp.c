@@ -1,7 +1,8 @@
 #include <string.h>
 
 int strncmp(const char *str1, const char *str2, size_t n) {
-    char *p1 = (char *)str1, *p2 = (char *)str2;
+    register const char *p1 = str1;
+    register const char *p2 = str2;
     while(n-- > 0) {
         if(*p1 != *p2)
             return (*p1 - *p2);

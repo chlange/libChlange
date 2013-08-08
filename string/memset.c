@@ -2,7 +2,7 @@
 
 void *memset(void *str, int c, size_t n) {
     register char *p = str;
-    while(n-- > 0)
+    while(n--)
         *p++ = c;
     return str;
 }

@@ -2,10 +2,10 @@
 
 void *memchr(const void *str, int c, size_t n) {
     register const char *p = str; 
-    while(n-- > 0) {
+    while(n--)
         if(*p == c)
             return (void *)p;
-        p++;
-    }
+        else
+		p++;
     return NULL;
 }

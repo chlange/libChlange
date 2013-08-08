@@ -3,7 +3,7 @@
 int strncmp(const char *str1, const char *str2, size_t n) {
     register const char *p1 = str1;
     register const char *p2 = str2;
-    while(n-- > 0) {
+    while(n--) {
         if(*p1 != *p2)
             return (*p1 - *p2);
         else

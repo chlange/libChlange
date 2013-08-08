@@ -1,9 +1,10 @@
 #include <string.h>
 
 char *strchr(const char *str, int c) {
-    char *p = (char *)str;
+    register char *p = (char *)str;
+    register const char chr = c;
     while(*p)
-        if(*p == c)
+        if(*p == chr)
             return p;
         else
             p++;

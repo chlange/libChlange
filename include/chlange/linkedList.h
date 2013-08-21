@@ -43,7 +43,7 @@ Node *list_prepend(LinkedList *list, void *data);
 /*
  * Removes head of list.
  *
- * Returns a pointer to deprecated head on success or NUlist on error.
+ * Returns a pointer to deprecated head on success or NULL on error.
  * If list has no members NULL is returned, too, but errno is set to NOERROR!
  */
 Node *list_popHead(LinkedList *list);
@@ -51,10 +51,10 @@ Node *list_popHead(LinkedList *list);
 /*
  * Removes tail of list.
  *
- * Returns a pointer to deprecated tail on success or NUlist on error.
+ * Returns a pointer to deprecated tail on success or NULL on error.
  * If list has no members NULL is returned, too, but errno is set to NOERROR!
  */
-Node *list_popTail(LinkedList *list);
+Node *list_remTail(LinkedList *list);
 
 /*
  * Adds a new node with attached data after node in list.
@@ -79,7 +79,7 @@ Node *list_remNode(LinkedList *list, Node *node);
 
 /*
  * Returns (non-NULL) pointer to node on position.
- * Index starts at 1, not 0!
+ * Index starts at 0!
  */
 Node *list_getNodeAtPosition(LinkedList *list, size_t position);
 
